@@ -1,0 +1,230 @@
+.about {
+  padding: 10rem 4rem;
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 4rem;
+  right: 4rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border-accent), transparent);
+}
+
+.about__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 7rem;
+  align-items: start;
+}
+
+/* ── Left column ──────────────────── */
+
+.about__image-wrap {
+  position: relative;
+  will-change: transform;
+}
+
+.about__image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(15%) contrast(1.06);
+  transition: filter var(--transition-slow);
+  display: block;
+}
+
+.about__image:hover {
+  filter: grayscale(0%) contrast(1.05);
+}
+
+.about__image-border {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: -18px;
+  bottom: -18px;
+  border: 1px solid var(--color-border-accent);
+  z-index: -1;
+  transition: transform var(--transition-smooth);
+  pointer-events: none;
+}
+
+.about__image-wrap:hover .about__image-border {
+  transform: translate(6px, 6px);
+}
+
+.about__credentials {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about__credential {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent-glow);
+}
+
+.about__credential-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+
+.about__credential-value {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.about__credential-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* ── Right column ─────────────────── */
+
+.about__section-label {
+  display: inline-block;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+  margin-bottom: 1rem;
+}
+
+.about__heading {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin-bottom: 3rem;
+}
+
+.about__heading em {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.about__bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.about__bio p {
+  font-size: 0.94rem;
+  line-height: 1.95;
+  color: var(--color-text-secondary);
+}
+
+/* ── Languages ────────────────────── */
+
+.about__lang-label {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+  margin-bottom: 1.5rem;
+}
+
+.about__lang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.about__lang-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-secondary);
+}
+
+.about__lang-level {
+  color: var(--color-text-faint);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+.about__lang-bar {
+  height: 1px;
+  background: var(--color-border);
+  position: relative;
+}
+
+.about__lang-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(to right, var(--color-accent-light), var(--color-purple-light));
+  transition: width 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
+}
+
+.is-visible .about__lang-fill {
+  width: var(--fill);
+}
+
+/* ── Responsive ───────────────────── */
+
+@media (max-width: 960px) {
+  .about {
+    padding: 6rem 1.5rem;
+  }
+
+  .about::before {
+    left: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .about__container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about__container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about__image-wrap {
+    max-width: 280px;
+  }
+
+  .about__credentials {
+    align-items: center;
+    width: 100%;
+  }
+
+  .about__credential {
+    align-items: center;
+    border-left: none;
+    padding-left: 0;
+    border-top: 2px solid var(--color-accent-glow);
+    padding-top: 0.75rem;
+  }
+
+  .about__lang-list {
+    width: 100%;
+  }
+
+  .about__lang-info {
+    text-align: left;
+  }
+}

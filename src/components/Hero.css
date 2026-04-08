@@ -1,0 +1,310 @@
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 4rem;
+}
+
+/* ── Background ─────────────────── */
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  animation: orbFloat 10s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero__orb--1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(92, 74, 122, 0.4) 0%, transparent 65%);
+  top: -15%;
+  right: -8%;
+  animation-delay: 0s;
+}
+
+.hero__orb--2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 107, 138, 0.3) 0%, transparent 65%);
+  bottom: 5%;
+  left: -5%;
+  animation-delay: -5s;
+}
+
+.hero__orb--3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(125, 107, 160, 0.2) 0%, transparent 70%);
+  top: 50%;
+  left: 40%;
+  animation-delay: -2.5s;
+  animation-duration: 14s;
+}
+
+@keyframes orbFloat {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(25px, -25px) scale(1.06);
+  }
+
+  66% {
+    transform: translate(-18px, 18px) scale(0.96);
+  }
+}
+
+.hero__watermark {
+  position: absolute;
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(320px, 45vw, 620px);
+  height: auto;
+  opacity: 0.045;
+  pointer-events: none;
+  user-select: none;
+  filter: blur(0.5px);
+}
+
+.hero__noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+}
+
+/* ── Content ─────────────────────── */
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+}
+
+.hero__label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.hero__label-line {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--color-accent-light);
+  flex-shrink: 0;
+}
+
+/* ── Name ───────────────────────── */
+
+.hero__name {
+  font-family: var(--font-title);
+  font-size: clamp(3.2rem, 5vw, 10.5rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.35em;
+  margin-bottom: 1.8rem;
+  perspective: 600px;
+}
+
+.hero__word {
+  display: inline-flex;
+}
+
+.hero__letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.038s + 0.6s);
+}
+
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(70%) rotateX(-25deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* ── Divider ────────────────────── */
+
+.hero__divider {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--color-accent-light), transparent);
+  margin-bottom: 1.8rem;
+  animation: lineExpand 1s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
+}
+
+@keyframes lineExpand {
+  to {
+    width: 280px;
+  }
+}
+
+/* ── Subtitle ───────────────────── */
+
+.hero__subtitle {
+  font-family: var(--font-title);
+  font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+  margin-bottom: 2.8rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
+}
+
+/* ── Tags ───────────────────────── */
+
+.hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.7s forwards;
+}
+
+.hero__tag {
+  padding: 0.38rem 0.9rem;
+  border: 1px solid var(--color-border-accent);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+  background: rgba(59, 107, 138, 0.06);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero__tag:hover {
+  background: rgba(59, 107, 138, 0.14);
+  border-color: rgba(90, 154, 181, 0.5);
+}
+
+/* ── Scroll indicator ───────────── */
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards;
+}
+
+.hero__scroll-line {
+  width: 48px;
+  height: 1px;
+  background: var(--color-text-faint);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent-light);
+  animation: scrollScan 2.2s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+@keyframes scrollScan {
+  0% {
+    left: -100%;
+  }
+
+  50% {
+    left: 0%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* ── Shared keyframe ────────────── */
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ─────────────────── */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 0 1.5rem;
+  }
+
+  .hero__scroll {
+    left: 1.5rem;
+  }
+
+  .hero__orb--1 {
+    width: 320px;
+    height: 320px;
+  }
+
+  .hero__orb--2 {
+    width: 220px;
+    height: 220px;
+  }
+
+  .hero__orb--3 {
+    display: none;
+  }
+
+  .hero__name {
+    flex-direction: column;
+    gap: 0;
+  }
+}

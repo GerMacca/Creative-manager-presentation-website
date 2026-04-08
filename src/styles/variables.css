@@ -1,0 +1,35 @@
+:root {
+  /* Background */
+  --color-bg: #0c0b12;
+  --color-bg-surface: #13111f;
+  --color-bg-card: #1a1729;
+  --color-bg-hover: #221f35;
+
+  /* Accents */
+  --color-accent: #3b6b8a;
+  --color-accent-light: #5a9ab5;
+  --color-accent-glow: #2a4d64;
+  --color-purple: #5c4a7a;
+  --color-purple-light: #7d6ba0;
+
+  /* Text */
+  --color-text-primary: #e8e2d5;
+  --color-text-secondary: #9a9188;
+  --color-text-faint: #4e4a55;
+  --color-text-accent: #7ab8d4;
+
+  /* Borders */
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-accent: rgba(90, 154, 181, 0.25);
+
+  /* Typography */
+  --font-title: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-mid: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-smooth: 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

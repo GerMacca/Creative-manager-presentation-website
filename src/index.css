@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+@import './styles/variables.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent-glow);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Scroll Animations ─────────────────────────────── */
+
+[data-animate] {
+  opacity: 0;
+  transition:
+    opacity var(--transition-smooth),
+    transform var(--transition-smooth),
+    filter var(--transition-smooth);
+  transition-delay: var(--delay, 0s);
+}
+
+[data-animate="fade-up"]    { transform: translateY(50px); }
+[data-animate="fade-down"]  { transform: translateY(-30px); }
+[data-animate="fade-left"]  { transform: translateX(-60px); }
+[data-animate="fade-right"] { transform: translateX(60px); }
+[data-animate="scale-in"]   { transform: scale(0.9); }
+[data-animate="blur-in"]    { filter: blur(16px); transform: scale(1.03); }
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}

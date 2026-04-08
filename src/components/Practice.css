@@ -1,0 +1,152 @@
+.practice {
+  padding: 10rem 4rem;
+  background: var(--color-bg-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.practice::before,
+.practice::after {
+  content: '';
+  position: absolute;
+  left: 4rem;
+  right: 4rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border-accent), transparent);
+}
+
+.practice::before { top: 0; }
+.practice::after  { bottom: 0; }
+
+.practice__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.practice__header {
+  margin-bottom: 5rem;
+}
+
+.practice__label {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+  margin-bottom: 1rem;
+}
+
+.practice__heading {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  font-weight: 300;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+/* ── Grid ─────────────────────────── */
+
+.practice__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.practice__card {
+  padding: 2.8rem 3rem;
+  border: 1px solid var(--color-border);
+  position: relative;
+  cursor: default;
+  transition: background var(--transition-mid);
+  overflow: hidden;
+}
+
+.practice__card:hover {
+  background: var(--color-bg-card);
+}
+
+/* Big watermark number on hover */
+.practice__card::before {
+  content: attr(data-num);
+  position: absolute;
+  bottom: -1rem;
+  right: 1rem;
+  font-family: var(--font-title);
+  font-size: 9rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: color var(--transition-slow), transform var(--transition-slow);
+}
+
+.practice__card:hover::before {
+  color: rgba(90, 154, 181, 0.06);
+  transform: scale(1.1);
+}
+
+/* Reveal line on hover */
+.practice__card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-accent), var(--color-purple));
+  transition: width var(--transition-smooth);
+}
+
+.practice__card:hover::after {
+  width: 100%;
+}
+
+.practice__num {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--color-text-faint);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.2rem;
+}
+
+.practice__card-title {
+  font-family: var(--font-title);
+  font-size: 1.18rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  transition: color var(--transition-fast);
+}
+
+.practice__card:hover .practice__card-title {
+  color: var(--color-text-accent);
+}
+
+.practice__card-desc {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* ── Responsive ───────────────────── */
+
+@media (max-width: 768px) {
+  .practice { padding: 6rem 1.5rem; }
+
+  .practice::before,
+  .practice::after {
+    left: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .practice__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practice__card {
+    padding: 2rem 1.5rem;
+  }
+}
