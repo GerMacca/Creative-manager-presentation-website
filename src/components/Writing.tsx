@@ -1,25 +1,16 @@
 import './Writing.css';
-import {
-  whenAI, perceptual, crisi, drammi, futuro, spettacolo,
-  illusione, architetture, sogno, sinestesia, fascino, teatro,
-} from '../assets/images';
+import { articles } from '../data/articles';
+import { estimateReadTimeMinutes } from '../utils/readTime';
 
-const articles = [
-  { title: 'When an AI seems to feel, what does it reveal about us?',            date: '26 Mar 2026', tags: ['AI', 'Empathy', 'Perception'],          image: whenAI        },
-  { title: 'Perceptual Freedom: Art as a Practice of Meaning-Making',             date: '13 Feb 2026', tags: ['Perception', 'Cognition', 'Art'],        image: perceptual    },
-  { title: 'La crisi di identità non è un caso: abbiamo perso il mistero',        date: '4 Dec 2025',  tags: ['Identity', 'Ritual', 'Sacred'],          image: crisi         },
-  { title: 'Drammi invisibili: la drammaturgia sensoriale nella vita quotidiana', date: '21 Sep 2025', tags: ['Sensory', 'Dramaturgy', 'Presence'],     image: drammi        },
-  { title: 'Il futuro dello spettatore: dalla passività alla co-creazione',       date: '5 Sep 2025',  tags: ['Audience', 'Co-creation', 'Immersive'],  image: futuro        },
-  { title: 'Lo spettacolo siamo noi: dal rito sacro alla manipolazione',          date: '3 Sep 2025',  tags: ['Society', 'Media', 'Theatre'],           image: spettacolo    },
-  { title: "L'illusione necessaria: perché amiamo l'arte?",                       date: '25 Aug 2025', tags: ['Perception', 'Neuroscience', 'Art'],     image: illusione     },
-  { title: "Architetture dell'immaginario: costruire spazi impossibili",           date: '18 Aug 2025', tags: ['Immersive', 'Space', 'Perception'],      image: architetture  },
-  { title: 'Sogno come tecnologia artistica: la realtà più reale',                date: '12 Aug 2025', tags: ['Dream', 'Reality', 'Immersive'],         image: sogno         },
-  { title: 'Sinestesia e arte: ascoltare i colori, toccare i suoni',              date: '4 Aug 2025',  tags: ['Synaesthesia', 'Aesthetics', 'Senses'],  image: sinestesia    },
-  { title: "Il fascino macabro dell'immaginazione: un'analisi del nostro tempo",  date: '28 Jul 2025', tags: ['Post-Horror', 'Aesthetics', 'Culture'],  image: fascino       },
-  { title: "Teatro Immersivo: La fine del palcoscenico, l'inizio del mondo",      date: '23 Jul 2025', tags: ['Theatre', 'Performance', 'Research'],    image: teatro        },
-];
+interface Props {
+  onArticleClick: (slug: string) => void;
+}
 
-export function Writing() {
+export function Writing({ onArticleClick }: Props) {
+  const readTimesBySlug = Object.fromEntries(
+    articles.map(article => [article.slug, estimateReadTimeMinutes(article.body())])
+  );
+
   return (
     <section className="writing" id="writing">
       <div className="writing__container">
@@ -39,21 +30,28 @@ export function Writing() {
         <div className="writing__grid">
           {articles.map((a, i) => (
             <article
-              key={i}
+              key={a.slug}
               className="article-card"
               data-animate="fade-up"
               style={{ '--delay': `${(i % 3) * 0.08}s` } as React.CSSProperties}
+              onClick={() => onArticleClick(a.slug)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={e => e.key === 'Enter' && onArticleClick(a.slug)}
             >
               <div className="article-card__image-wrap">
                 <img
                   src={a.image}
-                  alt={a.title}
+                  alt={a.imageAlt}
                   className="article-card__image"
                   loading="lazy"
                 />
               </div>
               <div className="article-card__body">
-                <time className="article-card__date">{a.date}</time>
+                <div className="article-card__meta">
+                  <time className="article-card__date">{a.date}</time>
+                  <span className="article-card__date">{readTimesBySlug[a.slug]} min read</span>
+                </div>
                 <h3 className="article-card__title">{a.title}</h3>
                 <div className="article-card__tags">
                   {a.tags.map(t => (

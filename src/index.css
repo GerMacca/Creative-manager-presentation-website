@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 @import './styles/variables.css';
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -34,6 +36,7 @@ a {
 img {
   display: block;
   max-width: 100%;
+  user-select: none;
 }
 
 /* ── Scroll Animations ─────────────────────────────── */
@@ -47,12 +50,30 @@ img {
   transition-delay: var(--delay, 0s);
 }
 
-[data-animate="fade-up"]    { transform: translateY(50px); }
-[data-animate="fade-down"]  { transform: translateY(-30px); }
-[data-animate="fade-left"]  { transform: translateX(-60px); }
-[data-animate="fade-right"] { transform: translateX(60px); }
-[data-animate="scale-in"]   { transform: scale(0.9); }
-[data-animate="blur-in"]    { filter: blur(16px); transform: scale(1.03); }
+[data-animate="fade-up"] {
+  transform: translateY(50px);
+}
+
+[data-animate="fade-down"] {
+  transform: translateY(-30px);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(-60px);
+}
+
+[data-animate="fade-right"] {
+  transform: translateX(60px);
+}
+
+[data-animate="scale-in"] {
+  transform: scale(0.9);
+}
+
+[data-animate="blur-in"] {
+  filter: blur(16px);
+  transform: scale(1.03);
+}
 
 [data-animate].is-visible {
   opacity: 1;

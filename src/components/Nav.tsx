@@ -3,16 +3,21 @@ import './Nav.css';
 import faviconUrl from '../assets/favicon.svg';
 
 const links = [
-  { id: 'about',    label: 'About'    },
+  { id: 'about', label: 'About' },
   { id: 'practice', label: 'Practice' },
   { id: 'projects', label: 'Projects' },
-  { id: 'writing',  label: 'Writing'  },
-  { id: 'contact',  label: 'Contact'  },
+  { id: 'writing', label: 'Writing' },
+  { id: 'contact', label: 'Contact' },
 ];
 
-export function Nav() {
+interface Props {
+  onLogoClick?: () => void;
+  onNavigate?: (id: string) => void;
+}
+
+export function Nav({ onLogoClick, onNavigate }: Props = {}) {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive]     = useState('');
+  const [active, setActive] = useState('');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -38,7 +43,11 @@ export function Nav() {
 
   return (
     <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
-      <a href="#" className="nav__logo">
+      <a
+        href="#"
+        className="nav__logo"
+        onClick={onLogoClick ? (e) => { e.preventDefault(); onLogoClick(); } : undefined}
+      >
         <img src={faviconUrl} alt="Artur Maccagnan" className="nav__logo-img" />
       </a>
       <ul className="nav__links">
@@ -47,6 +56,12 @@ export function Nav() {
             <a
               href={`#${l.id}`}
               className={`nav__link${active === l.id ? ' is-active' : ''}`}
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate(l.id);
+                }
+              }}
             >
               {l.label}
             </a>
