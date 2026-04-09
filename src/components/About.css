@@ -246,3 +246,10 @@
     height: 2px;
   }
 }
+
+@media (max-width: 390px) {
+  .about__heading {
+    font-size: clamp(1.55rem, 8.2vw, 1.95rem);
+    margin-bottom: 2.2rem;
+  }
+}

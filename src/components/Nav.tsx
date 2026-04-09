@@ -18,6 +18,7 @@ interface Props {
 export function Nav({ onLogoClick, onNavigate }: Props = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -41,16 +42,59 @@ export function Nav({ onLogoClick, onNavigate }: Props = {}) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 450) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
+
   return (
     <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
       <a
         href="#"
         className="nav__logo"
-        onClick={onLogoClick ? (e) => { e.preventDefault(); onLogoClick(); } : undefined}
+        onClick={onLogoClick ? (e) => { e.preventDefault(); setMenuOpen(false); onLogoClick(); } : undefined}
       >
         <img src={faviconUrl} alt="Artur Maccagnan" className="nav__logo-img" />
       </a>
-      <ul className="nav__links">
+      <button
+        type="button"
+        className={`nav__toggle${menuOpen ? ' is-open' : ''}`}
+        aria-label="Toggle navigation menu"
+        aria-expanded={menuOpen}
+        aria-controls="main-navigation-links"
+        onClick={() => setMenuOpen(prev => !prev)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+      <button
+        type="button"
+        className={`nav__backdrop${menuOpen ? ' is-open' : ''}`}
+        aria-label="Close navigation menu"
+        tabIndex={menuOpen ? 0 : -1}
+        onClick={() => setMenuOpen(false)}
+      />
+      <ul id="main-navigation-links" className={`nav__links${menuOpen ? ' is-open' : ''}`}>
         {links.map(l => (
           <li key={l.id}>
             <a
@@ -61,6 +105,7 @@ export function Nav({ onLogoClick, onNavigate }: Props = {}) {
                   e.preventDefault();
                   onNavigate(l.id);
                 }
+                setMenuOpen(false);
               }}
             >
               {l.label}

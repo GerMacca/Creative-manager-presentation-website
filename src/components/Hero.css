@@ -308,3 +308,10 @@
     gap: 0;
   }
 }
+
+@media (max-width: 390px) {
+  .hero__name {
+    font-size: clamp(2.35rem, 11.5vw, 2.9rem);
+    letter-spacing: 0.035em;
+  }
+}
