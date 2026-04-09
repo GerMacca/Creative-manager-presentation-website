@@ -95,6 +95,7 @@ export function About() {
           </div>
 
           <div
+            className="about__lang-group"
             data-animate="fade-up"
             style={{ '--delay': '0.32s' } as React.CSSProperties}
           >

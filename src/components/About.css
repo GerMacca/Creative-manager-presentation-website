@@ -142,6 +142,10 @@
   margin-bottom: 1.5rem;
 }
 
+.about__lang-group {
+  width: 100%;
+}
+
 .about__lang-list {
   display: flex;
   flex-direction: column;
@@ -196,11 +200,12 @@
     gap: 3rem;
   }
 
-  .about__container > div {
+  .about__container>div {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
   }
 
   .about__image-wrap {
@@ -224,7 +229,20 @@
     width: 100%;
   }
 
+  .about__lang-group {
+    width: 100%;
+  }
+
   .about__lang-info {
     text-align: left;
+    font-size: 0.92rem;
+  }
+
+  .about__lang-level {
+    font-size: 0.75rem;
+  }
+
+  .about__lang-bar {
+    height: 2px;
   }
 }
